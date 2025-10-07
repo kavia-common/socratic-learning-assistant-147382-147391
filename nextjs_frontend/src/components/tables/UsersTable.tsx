@@ -68,7 +68,7 @@ export default function UsersTable() {
                 <td className="px-2 py-2">{u.email}</td>
                 <td className="px-2 py-2">{u.role}</td>
                 <td className="px-2 py-2 text-right">
-                  <Button variant="danger" onClick={() => onDelete(u.id)}>
+                  <Button variant="destructive" onClick={() => onDelete(u.id)}>
                     Delete
                   </Button>
                 </td>

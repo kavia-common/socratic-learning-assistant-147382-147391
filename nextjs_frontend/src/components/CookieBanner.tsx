@@ -31,7 +31,7 @@ export default function CookieBanner() {
               safeStorage.set("cookies.accepted", "all");
               setOpen(false);
             }}
-            className="px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus-ring"
+            className="u-transition px-3 py-2 rounded-md bg-[var(--color-primary)] text-white hover:bg-blue-700 focus-ring"
           >
             Accept all
           </button>
@@ -40,7 +40,7 @@ export default function CookieBanner() {
               safeStorage.set("cookies.accepted", "essential");
               setOpen(false);
             }}
-            className="px-3 py-2 rounded-md border hover:bg-gray-50 focus-ring"
+            className="u-transition px-3 py-2 rounded-md border border-[var(--border)] hover:bg-gray-50 focus-ring"
           >
             Essential only
           </button>

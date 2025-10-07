@@ -54,7 +54,7 @@ export default function DepartmentsTable() {
               <tr key={d.id} className="border-t">
                 <td className="px-2 py-2">{d.name}</td>
                 <td className="px-2 py-2 text-right">
-                  <Button variant="danger" onClick={() => onDelete(d.id)}>
+                  <Button variant="destructive" onClick={() => onDelete(d.id)}>
                     Delete
                   </Button>
                 </td>

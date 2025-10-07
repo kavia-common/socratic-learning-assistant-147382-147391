@@ -13,7 +13,7 @@ export default function HeaderBar() {
           <span className="font-semibold">Socratic</span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/upload" className="px-3 py-1.5 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 focus-ring">
+          <Link href="/upload" className="u-transition px-3 py-1.5 text-sm rounded-md bg-[var(--color-primary)] text-white hover:bg-blue-700 focus-ring">
             Upload
           </Link>
           <SecureAvatarMenu />

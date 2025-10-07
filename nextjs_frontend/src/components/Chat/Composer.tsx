@@ -113,7 +113,7 @@ export default function Composer({
         }}
       >
         <button
-          className="h-9 w-9 rounded-md border hover:bg-gray-50 flex items-center justify-center focus-ring"
+          className="u-transition h-9 w-9 rounded-md border hover:bg-gray-50 flex items-center justify-center focus-ring"
           aria-label="Attach file"
           onClick={() => fileInputRef.current?.click()}
         >
@@ -130,7 +130,7 @@ export default function Composer({
           rows={1}
         />
         <button
-          className="h-9 w-9 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 disabled:opacity-60 focus-ring"
+          className="u-transition h-9 w-9 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center hover:bg-blue-700 disabled:opacity-60 focus-ring"
           aria-label="Send message"
           onClick={submit}
           disabled={!value.trim()}

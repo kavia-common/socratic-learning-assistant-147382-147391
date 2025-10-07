@@ -64,7 +64,7 @@ export default function MaterialsPage() {
               <button
                 onClick={onUpload}
                 disabled={busy}
-                className="px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60 focus-ring"
+                className="u-transition px-3 py-2 rounded-md bg-[var(--color-primary)] text-white hover:bg-blue-700 disabled:opacity-60 focus-ring"
               >
                 {busy ? "Uploading..." : "Upload"}
               </button>

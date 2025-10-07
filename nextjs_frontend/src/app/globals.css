@@ -9,9 +9,22 @@
   --color-background: #f9fafb; /* background */
   --color-surface: #ffffff; /* surface */
   --color-text: #111827; /* text */
+
   --ring: 2px;
+  --ring-color: color-mix(in oklab, var(--color-primary), white 10%);
+  --ring-offset: 2px;
+
   --radius: 0.75rem; /* 12px, used for cards and inputs */
+  --radius-sm: 0.5rem; /* 8px */
   --radius-lg: 1rem;  /* 16px, used for main surfaces */
+
+  --transition-base: 180ms ease-out; /* between 150–250ms as requested */
+  --transition-fast: 150ms ease-out;
+  --transition-slow: 220ms ease-out;
+
+  --border: #e5e7eb;
+
+  --focus-inset-shadow: 0 0 0 var(--ring) var(--ring-color);
 }
 
 /* Tailwind v4 custom tokens */
@@ -55,9 +68,26 @@ a {
   text-decoration: none;
 }
 
-.focus-ring:focus-visible {
-  outline: var(--ring) solid var(--color-primary);
-  outline-offset: 2px;
+/* Accessible focus-visible ring utility aligned with theme */
+.focus-ring:focus-visible,
+[role="button"].focus-ring:focus-visible {
+  outline: var(--ring) solid var(--ring-color);
+  outline-offset: var(--ring-offset);
+}
+
+/* Reduced motion: disable animations/transitions if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Transition utility for interactive elements */
+.u-transition {
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base), opacity var(--transition-base);
 }
 
 /* Utilities */

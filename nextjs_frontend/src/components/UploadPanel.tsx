@@ -55,7 +55,7 @@ export default function UploadPanel() {
         <p className="text-gray-700">Drag and drop files here</p>
         <p className="text-gray-500 text-sm">PDF, PPT, PPTX, MD, TXT</p>
         <div className="mt-4">
-          <label className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 cursor-pointer focus-ring">
+          <label className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[var(--color-primary)] text-white hover:bg-blue-700 cursor-pointer focus-ring u-transition">
             <input
               type="file"
               multiple
@@ -78,7 +78,7 @@ export default function UploadPanel() {
               </li>
             ))}
           </ul>
-          <button onClick={onUpload} className="mt-2 px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus-ring">
+          <button onClick={onUpload} className="u-transition mt-2 px-3 py-2 rounded-md bg-[var(--color-primary)] text-white hover:bg-blue-700 focus-ring">
             Upload
           </button>
           {status && <p className="text-sm text-gray-700">{status}</p>}

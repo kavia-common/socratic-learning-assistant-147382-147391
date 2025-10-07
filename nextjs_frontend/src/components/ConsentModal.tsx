@@ -37,7 +37,7 @@ export default function ConsentModal() {
               safeStorage.set("consent", "granted");
               setOpen(false);
             }}
-            className="px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus-ring"
+            className="u-transition px-3 py-2 rounded-md bg-[var(--color-primary)] text-white hover:bg-blue-700 focus-ring"
           >
             I agree
           </button>
@@ -46,7 +46,7 @@ export default function ConsentModal() {
               safeStorage.set("consent", "denied");
               setOpen(false);
             }}
-            className="px-3 py-2 rounded-md border hover:bg-gray-50 focus-ring"
+            className="u-transition px-3 py-2 rounded-md border border-[var(--border)] hover:bg-gray-50 focus-ring"
           >
             I decline
           </button>

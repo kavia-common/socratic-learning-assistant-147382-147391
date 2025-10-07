@@ -80,7 +80,7 @@ export default function ChatPanel() {
         <button
           onClick={onSend}
           disabled={loading}
-          className="rounded-md bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 disabled:opacity-60 focus-ring"
+          className="u-transition rounded-md bg-[var(--color-primary)] text-white px-4 py-2 hover:bg-blue-700 disabled:opacity-60 focus-ring"
         >
           {loading ? "Sending..." : "Send"}
         </button>
