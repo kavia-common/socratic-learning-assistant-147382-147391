@@ -69,9 +69,46 @@ a {
 }
 a:hover { color: #1e40af; }
 
+/* Screen-reader-only utility (used for live regions and tooltips) */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important; /* added line */
+  border: 0 !important;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #ffffff;
+  color: #111827;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  z-index: 1000;
+  transition: top var(--transition-base);
+}
+.skip-link:focus {
+  top: 8px;
+  outline: var(--ring) solid var(--ring-color);
+  outline-offset: var(--ring-offset);
+}
+
 /* Accessible focus-visible ring utility aligned with theme */
 .focus-ring:focus-visible,
-[role="button"].focus-ring:focus-visible {
+[role="button"].focus-ring:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
   outline: var(--ring) solid var(--ring-color);
   outline-offset: var(--ring-offset);
 }

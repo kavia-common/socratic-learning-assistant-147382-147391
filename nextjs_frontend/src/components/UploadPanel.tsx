@@ -35,6 +35,9 @@ export default function UploadPanel() {
 
   return (
     <div className="card p-6 space-y-4">
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {status ? `Upload status: ${status}` : ""}
+      </div>
       <div
         onDragOver={(e) => {
           e.preventDefault();

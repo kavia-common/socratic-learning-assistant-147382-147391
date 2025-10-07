@@ -54,7 +54,7 @@ export default function ChatPage() {
 
   return (
     <AppShell>
-      <section className="space-y-4">
+      <section className="space-y-4" role="region" aria-label="Chat area">
         <div className="rounded-xl gradient-bg p-6 card">
           <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">Chat</h1>
           <p className="mt-2 text-gray-600">

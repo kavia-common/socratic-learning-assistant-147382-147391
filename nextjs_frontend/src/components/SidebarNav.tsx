@@ -15,7 +15,7 @@ export default function SidebarNav({ collapsed = false }: { collapsed?: boolean 
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Sidebar" className="w-full p-4">
+    <nav aria-label="Sidebar" role="navigation" className="w-full p-4">
       <div className="flex items-center gap-2 px-2 py-3">
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-primary)] text-white">S</span>
         <span

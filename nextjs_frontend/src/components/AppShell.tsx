@@ -70,7 +70,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         className={`fixed md:static z-50 top-0 left-0 h-full bg-white border-r border-gray-200 transform transition-transform ${
           open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
-        aria-label="Primary"
+        aria-label="Primary navigation"
+        role="navigation"
       >
         <div
           className={`flex h-full flex-col ${
@@ -80,7 +81,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           style={{ transitionDuration: "220ms", transitionTimingFunction: "ease-out" }}
         >
           {/* Brand row */}
-          <div className="h-14 border-b flex items-center px-4">
+          <div className="h-14 border-b flex items-center px-4" role="banner" aria-label="Sidebar brand">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-primary)] text-white">S</span>
             <span
               className={`ml-2 font-semibold origin-left ${
@@ -94,7 +95,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Nav */}
-          <nav className="p-3 space-y-1">
+          <nav className="p-3 space-y-1" aria-label="Primary sections">
             {NavItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -118,6 +119,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                       collapsed ? "opacity-0 translate-x-[-4px] pointer-events-none" : "opacity-100 translate-x-0"
                     } motion-safe:transition-all`}
                     style={{ transitionDuration: "180ms" }}
+                    aria-hidden={collapsed}
                   >
                     {item.label}
                   </span>
@@ -162,7 +164,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       <div className="flex-1 min-w-0 flex flex-col">
         {/* Header: compact 56–64px, consistent padding, subtle shadow */}
-        <header className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b shadow-[var(--shadow-header)]">
+        <header className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b shadow-[var(--shadow-header)]" role="banner" aria-label="Application header">
           <div className="flex items-center justify-between px-4 md:px-6 header-compact">
             <div className="flex items-center gap-2">
               {/* Mobile menu toggle */}
@@ -176,7 +178,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 {open ? <X size={18} /> : <Menu size={18} />}
               </button>
 
-              <Link href="/" className="font-semibold focus-ring">
+              <Link href="/" className="font-semibold focus-ring" aria-label="Socratic home">
                 Socratic
               </Link>
             </div>
@@ -194,7 +196,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <span className="hidden lg:inline">{collapsed ? "Expand" : "Collapse"}</span>
               </button>
 
-              <div className="hidden sm:flex items-center gap-2 text-xs text-gray-600">
+              <div className="hidden sm:flex items-center gap-2 text-xs text-gray-600" role="status" aria-live="polite">
                 <span className="inline-block h-2 w-2 rounded-full bg-[var(--color-secondary)]" />
                 <span>Beta</span>
               </div>
@@ -212,12 +214,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Main content */}
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main id="main" className="flex-1 p-4 md:p-6" role="main" aria-label="Main content area">{children}</main>
 
-        <footer className="px-4 md:px-6 py-4 text-sm text-gray-500 bg-white border-t">
+        <footer className="px-4 md:px-6 py-4 text-sm text-gray-500 bg-white border-t" role="contentinfo" aria-label="Footer">
           <div className="flex items-center justify-between">
             <span>&copy; {new Date().getFullYear()} Socratic Learning Assistant</span>
-            <nav className="flex gap-4">
+            <nav className="flex gap-4" aria-label="Legal">
               <Link className="hover:underline focus-ring" href="/privacy">
                 Privacy
               </Link>

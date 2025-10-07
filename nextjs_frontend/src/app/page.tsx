@@ -4,7 +4,7 @@ import ChatPanel from "@/components/ChatPanel";
 export default function Home() {
   return (
     <AppShell>
-      <section aria-label="Chat" className="space-y-4">
+      <section aria-label="Chat" role="region" className="space-y-4">
         <div className="rounded-xl gradient-bg p-6 card">
           <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">
             Socratic Learning Assistant

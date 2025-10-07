@@ -22,8 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
+        {/* Skip link for keyboard users to jump to main content */}
+        <a href="#main" className="skip-link">Skip to main content</a>
         <AuthProvider>
           <QueryProvider>
+            {/* The children should include semantic landmarks; RouteTransition will focus <main> */}
             <RouteTransition>{children}</RouteTransition>
             <ConsentModal />
             <CookieBanner />

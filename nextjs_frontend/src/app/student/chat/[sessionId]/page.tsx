@@ -123,7 +123,12 @@ export default function ChatSessionPage() {
 
       <main className="flex-1 flex flex-col min-w-0">
         <div className="flex-1 p-4 md:p-6">
-          <div role="log" aria-label="Chat transcript" className="space-y-3">
+          <div
+            role="log"
+            aria-live="polite"
+            aria-label="Chat transcript"
+            className="space-y-3"
+          >
             {isLoading && <p className="text-sm text-gray-600">Loading messages...</p>}
             {messages.map((m) => (
               <ChatMessage key={m.id} role={m.role} content={m.content} timestamp={new Date(m.createdAt).toLocaleTimeString()} />
