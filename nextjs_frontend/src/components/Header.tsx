@@ -8,6 +8,7 @@ import { Button } from "./ui/Button";
 /**
  * PUBLIC_INTERFACE
  * Top header with basic role-aware actions and profile menu placeholders.
+ * Accepts optional onToggleSidebar for integrating with a collapsible sidebar toggle.
  */
 export default function Header() {
   const { role, logout } = useAuth();

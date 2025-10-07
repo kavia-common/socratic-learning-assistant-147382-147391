@@ -11,14 +11,22 @@ const navItems = [
   { href: "/security", label: "Security" },
 ];
 
-export default function SidebarNav() {
+export default function SidebarNav({ collapsed = false }: { collapsed?: boolean }) {
   const pathname = usePathname();
 
   return (
     <nav aria-label="Sidebar" className="w-full p-4">
       <div className="flex items-center gap-2 px-2 py-3">
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-primary)] text-white">S</span>
-        <span className="text-sm font-semibold">Socratic Assistant</span>
+        <span
+          className={`text-sm font-semibold origin-left ${
+            collapsed ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
+          } motion-safe:transition-all`}
+          style={{ transitionDuration: "180ms" }}
+          aria-hidden={collapsed}
+        >
+          Socratic Assistant
+        </span>
       </div>
       <ul className="mt-4 space-y-1">
         {navItems.map((item, index) => {
@@ -27,11 +35,13 @@ export default function SidebarNav() {
           return (
             <li key={key} className="relative">
               <Link
-                className={`group block rounded-md px-3 py-2 text-sm focus-ring ${
+                className={`group flex items-center gap-3 rounded-md px-3 py-2 text-sm focus-ring ${
                   active ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"
                 }`}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
+                aria-label={collapsed ? item.label : undefined}
+                title={collapsed ? item.label : undefined}
               >
                 {/* Left accent bar for active/hover state without layout shift */}
                 <span
@@ -40,7 +50,15 @@ export default function SidebarNav() {
                     active ? "bg-blue-500" : "bg-transparent group-hover:bg-blue-200 group-focus-visible:bg-blue-300"
                   }`}
                 />
-                {item.label}
+                <span
+                  className={`whitespace-nowrap ${
+                    collapsed ? "opacity-0 translate-x-[-4px] pointer-events-none" : "opacity-100 translate-x-0"
+                  } motion-safe:transition-all`}
+                  style={{ transitionDuration: "160ms" }}
+                  aria-hidden={collapsed}
+                >
+                  {item.label}
+                </span>
               </Link>
             </li>
           );

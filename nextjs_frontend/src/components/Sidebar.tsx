@@ -5,29 +5,25 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Badge } from "./ui/Badge";
 
-// De-duplicated student nav to avoid two items with identical href
-const studentItems = [
-  { href: "/student", label: "Student Home" },
-];
-
-const mentorItems = [
-  { href: "/mentor", label: "Students" },
-  { href: "/mentor", label: "Analytics" },
-];
-
-const adminItems = [
-  { href: "/admin", label: "Users" },
-  { href: "/admin", label: "Departments" },
-  { href: "/admin", label: "Analytics" },
-];
-
 /**
  * PUBLIC_INTERFACE
- * Role-aware Sidebar with streak indicator (for students).
+ * Role-aware Sidebar with optional collapsed (icons-only) layout and streak indicator (for students).
  */
-export default function Sidebar() {
+export default function Sidebar({ collapsed = false }: { collapsed?: boolean }) {
   const { role } = useAuth();
   const pathname = usePathname();
+
+  // Nav definitions
+  const studentItems = [{ href: "/student", label: "Student Home" }];
+  const mentorItems = [
+    { href: "/mentor", label: "Students" },
+    { href: "/mentor", label: "Analytics" },
+  ];
+  const adminItems = [
+    { href: "/admin", label: "Users" },
+    { href: "/admin", label: "Departments" },
+    { href: "/admin", label: "Analytics" },
+  ];
 
   const items =
     role === "admin" ? adminItems : role === "mentor" ? mentorItems : studentItems;
@@ -39,10 +35,24 @@ export default function Sidebar() {
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-primary)] text-white">
             S
           </span>
-          <span className="text-sm font-semibold">Socratic Assistant</span>
+          <span
+            className={`text-sm font-semibold origin-left ${
+              collapsed ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
+            } motion-safe:transition-all`}
+            aria-hidden={collapsed}
+            style={{ transitionDuration: "180ms" }}
+          >
+            Socratic Assistant
+          </span>
         </div>
         {role !== "student" ? null : (
-          <Badge className="bg-amber-100 text-amber-800" aria-label="Current streak">
+          <Badge
+            className={`bg-amber-100 text-amber-800 ${
+              collapsed ? "opacity-0 pointer-events-none" : "opacity-100"
+            } motion-safe:transition-opacity`}
+            aria-label="Current streak"
+            aria-hidden={collapsed}
+          >
             🔥 Streak: 3
           </Badge>
         )}
@@ -54,11 +64,13 @@ export default function Sidebar() {
           return (
             <li key={key} className="relative">
               <Link
-                className={`group block rounded-md pl-3 pr-3 py-2 text-sm focus-ring ${
+                className={`group flex items-center gap-3 rounded-md pl-3 pr-3 py-2 text-sm focus-ring ${
                   active ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"
                 }`}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
+                aria-label={collapsed ? item.label : undefined}
+                title={collapsed ? item.label : undefined}
               >
                 {/* Left accent bar in primary color, no layout shift */}
                 <span
@@ -67,7 +79,16 @@ export default function Sidebar() {
                     active ? "bg-blue-600" : "bg-transparent group-hover:bg-blue-200 group-focus-visible:bg-blue-300"
                   }`}
                 />
-                {item.label}
+                {/* In this generic Sidebar we don't have icons defined, so only label with opacity change */}
+                <span
+                  className={`whitespace-nowrap ${
+                    collapsed ? "opacity-0 translate-x-[-4px] pointer-events-none" : "opacity-100 translate-x-0"
+                  } motion-safe:transition-all`}
+                  style={{ transitionDuration: "160ms" }}
+                  aria-hidden={collapsed}
+                >
+                  {item.label}
+                </span>
               </Link>
             </li>
           );
