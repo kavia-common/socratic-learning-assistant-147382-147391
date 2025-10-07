@@ -29,7 +29,7 @@ export default function ChatPanel() {
     try {
       const res = await api.post<{ reply: string }>("/api/chat", { message: cleaned });
       setMessages((m) => [...m, { role: "assistant", content: res.reply }]);
-    } catch (_err) {
+    } catch {
       setMessages((m) => [
         ...m,
         { role: "assistant", content: "Sorry, there was an error. Please try again." },
