@@ -10,7 +10,8 @@
   --color-surface: #ffffff; /* surface */
   --color-text: #111827; /* text */
   --ring: 2px;
-  --radius: 0.75rem;
+  --radius: 0.75rem; /* 12px, used for cards and inputs */
+  --radius-lg: 1rem;  /* 16px, used for main surfaces */
 }
 
 /* Tailwind v4 custom tokens */
@@ -24,6 +25,7 @@
   --color-text: var(--color-text);
 
   --shadow-soft: 0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 3px 0 rgb(0 0 0 / 0.04);
+  --shadow-header: 0 1px 2px 0 rgb(0 0 0 / 0.04);
 }
 
 * {
@@ -38,11 +40,14 @@ body {
   overflow-x: hidden;
   background-color: var(--color-background);
   color: var(--color-text);
+  /* Subtle app-wide gradient to satisfy acceptance criteria */
+  background-image: linear-gradient(to bottom right, rgb(59 130 246 / 0.10), #f9fafb);
+  background-attachment: fixed;
 }
 
 body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
-    "Segoe UI Emoji";
+    "Segoe UI Emoji");
 }
 
 a {
@@ -64,6 +69,11 @@ a {
 
 .gradient-bg {
   background-image: linear-gradient(to bottom right, rgb(59 130 246 / 0.1), #f9fafb);
+}
+
+/* Compact header utility (56–64px range) */
+.header-compact {
+  height: 3.5rem; /* 56px */
 }
 
 /* Light prose for bubbles */

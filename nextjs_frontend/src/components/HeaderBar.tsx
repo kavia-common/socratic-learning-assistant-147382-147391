@@ -6,8 +6,8 @@ import SecureAvatarMenu from "./SecureAvatarMenu";
 
 export default function HeaderBar() {
   return (
-    <header className="sticky top-0 z-30 bg-white border-b">
-      <div className="flex items-center justify-between px-4 md:px-6 py-3">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b shadow-[var(--shadow-header)]">
+      <div className="flex items-center justify-between px-4 md:px-6 header-compact">
         <Link href="/" className="inline-flex items-center gap-2 focus-ring" aria-label="Socratic Home">
           <Image src="/logo.svg" alt="Socratic logo" width={24} height={24} priority />
           <span className="font-semibold">Socratic</span>

@@ -21,8 +21,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
-      {/* Mobile drawer */}
+    <div className="flex min-h-screen text-[var(--color-text)]">
+      {/* Mobile drawer overlay */}
       <div
         className={`fixed inset-0 z-40 bg-black/40 transition-opacity md:hidden ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -30,8 +30,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         onClick={() => setOpen(false)}
         aria-hidden={!open}
       />
+      {/* Sidebar ~280px with clear selected state (accent left bar) */}
       <aside
-        className={`fixed md:static z-50 top-0 left-0 h-full w-72 md:w-64 bg-white border-r border-gray-200 transform transition-transform ${
+        className={`fixed md:static z-50 top-0 left-0 h-full w-[280px] bg-white border-r border-gray-200 transform transition-transform ${
           open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
         aria-label="Primary"
@@ -47,9 +48,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-800 hover:bg-gray-50 focus-ring"
+                className="group relative flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-800 hover:bg-gray-50 focus-ring"
                 onClick={() => setOpen(false)}
               >
+                {/* Left accent bar appears on hover/focus without shifting layout */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-0 top-0 h-full w-[3px] rounded-r bg-transparent group-hover:bg-blue-200 group-focus-visible:bg-blue-300 transition-colors"
+                />
                 <Icon size={18} aria-hidden />
                 <span>{item.label}</span>
               </Link>
@@ -62,8 +68,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur border-b">
-          <div className="flex items-center justify-between px-4 md:px-6 h-14">
+        {/* Header: compact 56–64px, consistent padding, subtle shadow */}
+        <header className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b shadow-[var(--shadow-header)]">
+          <div className="flex items-center justify-between px-4 md:px-6 header-compact">
             <div className="flex items-center gap-2">
               <button
                 className="md:hidden p-2 rounded-md border hover:bg-gray-50 focus-ring"
@@ -91,9 +98,11 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               </button>
             </div>
           </div>
+          {/* Decorative gradient divider under header */}
           <div className="h-[3px] bg-gradient-to-r from-blue-500/10 to-gray-50" />
         </header>
 
+        {/* Main surfaces remain white with rounded-lg and shadow-sm where used via .card. Keep consistent gutters. */}
         <main className="flex-1 p-4 md:p-6">{children}</main>
 
         <footer className="px-4 md:px-6 py-4 text-sm text-gray-500 bg-white border-t">

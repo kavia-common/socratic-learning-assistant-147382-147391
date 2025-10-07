@@ -50,17 +50,23 @@ export default function Sidebar() {
       <ul className="mt-4 space-y-1">
         {items.map((item, index) => {
           const active = pathname === item.href;
-          // Use a stable, unique key even if future items share href
           const key = `${item.href}-${index}`;
           return (
-            <li key={key}>
+            <li key={key} className="relative">
               <Link
-                className={`block rounded-md px-3 py-2 text-sm focus-ring ${
+                className={`group block rounded-md pl-3 pr-3 py-2 text-sm focus-ring ${
                   active ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"
                 }`}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
               >
+                {/* Left accent bar in primary color, no layout shift */}
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute left-0 top-0 h-full w-[3px] rounded-r transition-colors ${
+                    active ? "bg-blue-600" : "bg-transparent group-hover:bg-blue-200 group-focus-visible:bg-blue-300"
+                  }`}
+                />
                 {item.label}
               </Link>
             </li>
