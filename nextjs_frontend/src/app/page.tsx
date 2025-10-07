@@ -13,7 +13,9 @@ export default function Home() {
             Engage in guided Socratic dialogue using your uploaded course materials.
           </p>
         </div>
-        <ChatPanel />
+        <div className="chat-container">
+          <ChatPanel />
+        </div>
       </section>
     </AppShell>
   );

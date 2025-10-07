@@ -5,18 +5,21 @@ import React from "react";
 export function ChatMessage({
   role,
   content,
+  timestamp,
 }: {
   role: "user" | "assistant";
   content: string;
+  timestamp?: string;
 }) {
   const isAssistant = role === "assistant";
   return (
-    <div
-      className={`max-w-[80%] rounded-lg px-3 py-2 ${
-        isAssistant ? "bg-blue-50 text-blue-900" : "bg-gray-100 text-gray-900 ml-auto"
-      }`}
-    >
-      <p className="text-sm leading-relaxed whitespace-pre-wrap">{content}</p>
+    <div className={`flex ${isAssistant ? "justify-start" : "justify-end"}`}>
+      <div
+        className={`bubble ${isAssistant ? "bubble-assistant" : "bubble-user"} max-w-[850px] bubble-in`}
+      >
+        {timestamp && <div className="msg-meta mb-1">{timestamp}</div>}
+        <div className="prose-chat whitespace-pre-wrap">{content}</div>
+      </div>
     </div>
   );
 }

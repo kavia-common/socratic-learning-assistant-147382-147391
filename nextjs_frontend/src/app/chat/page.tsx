@@ -65,15 +65,22 @@ export default function ChatPage() {
         <div className="card p-0">
           <div
             role="log"
+            aria-live="polite"
             aria-label="Chat transcript"
-            className="max-h-[60vh] overflow-y-auto p-4 md:p-6 flex flex-col gap-3"
+            className="max-h-[60vh] overflow-y-auto p-4 md:p-6"
           >
-            {messages.map((m, i) => (
-              <MessageBubble key={i} role={m.role}>
-                {m.content}
-              </MessageBubble>
-            ))}
-            <div ref={endRef} />
+            <div className="chat-container mx-auto w-full flex flex-col gap-3">
+              {messages.map((m, i) => (
+                <MessageBubble key={i} role={m.role}>
+                  {m.content}
+                </MessageBubble>
+              ))}
+
+              {/* Example separator (could be date/time) */}
+              {/* <div className="flex items-center"><span className="chat-separator">Today</span></div> */}
+
+              <div ref={endRef} />
+            </div>
           </div>
           <div className="px-4 md:px-6 pb-4">
             <Composer onSend={handleSend} onAttach={onAttach} />

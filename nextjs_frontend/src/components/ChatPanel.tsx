@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { sanitizeInput } from "@/lib/security";
 import { api } from "@/lib/api";
+import MessageBubble from "./Chat/MessageBubble";
 
 /**
  * PUBLIC_INTERFACE
@@ -48,42 +49,41 @@ export default function ChatPanel() {
   }
 
   return (
-    <div className="card p-4 md:p-6">
+    <div className="card p-0">
       <div
         role="log"
+        aria-live="polite"
         aria-label="Chat transcript"
-        className="h-[50vh] overflow-y-auto space-y-3 border-b pb-4"
+        className="max-h-[60vh] overflow-y-auto p-4 md:p-6 flex flex-col gap-3"
       >
-        {messages.map((m, idx) => (
-          <div
-            key={idx}
-            className={`max-w-[80%] rounded-lg px-3 py-2 ${
-              m.role === "assistant"
-                ? "bg-blue-50 text-blue-900"
-                : "bg-gray-100 text-gray-900 ml-auto"
-            }`}
-          >
-            <p className="text-sm leading-relaxed">{m.content}</p>
-          </div>
-        ))}
-        <div ref={endRef} />
+        <div className="chat-container mx-auto w-full flex flex-col gap-3">
+          {messages.map((m, idx) => (
+            <MessageBubble key={idx} role={m.role}>
+              {m.content}
+            </MessageBubble>
+          ))}
+          <div ref={endRef} />
+        </div>
       </div>
-      <div className="pt-4 flex items-center gap-2">
-        <input
-          aria-label="Type your message"
-          placeholder="Ask a question..."
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-          onKeyDown={handleKeyDown}
-          className="flex-1 rounded-md border px-3 py-2 focus-ring"
-        />
-        <button
-          onClick={onSend}
-          disabled={loading}
-          className="u-transition rounded-md bg-[var(--color-primary)] text-white px-4 py-2 hover:bg-blue-700 disabled:opacity-60 focus-ring"
-        >
-          {loading ? "Sending..." : "Send"}
-        </button>
+
+      <div className="px-4 md:px-6 py-4 border-t bg-white">
+        <div className="flex items-center gap-2">
+          <input
+            aria-label="Type your message"
+            placeholder="Ask a question..."
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            onKeyDown={handleKeyDown}
+            className="flex-1 rounded-md border px-3 py-2 focus-ring"
+          />
+          <button
+            onClick={onSend}
+            disabled={loading}
+            className="u-transition rounded-md bg-[var(--color-primary)] text-white px-4 py-2 hover:bg-blue-700 disabled:opacity-60 focus-ring"
+          >
+            {loading ? "Sending..." : "Send"}
+          </button>
+        </div>
       </div>
     </div>
   );

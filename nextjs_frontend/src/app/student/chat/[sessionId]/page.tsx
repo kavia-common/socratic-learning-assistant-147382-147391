@@ -126,7 +126,7 @@ export default function ChatSessionPage() {
           <div role="log" aria-label="Chat transcript" className="space-y-3">
             {isLoading && <p className="text-sm text-gray-600">Loading messages...</p>}
             {messages.map((m) => (
-              <ChatMessage key={m.id} role={m.role} content={m.content} />
+              <ChatMessage key={m.id} role={m.role} content={m.content} timestamp={new Date(m.createdAt).toLocaleTimeString()} />
             ))}
             <div ref={endRef} />
           </div>

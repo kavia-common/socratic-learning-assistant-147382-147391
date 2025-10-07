@@ -4,33 +4,59 @@ import React from "react";
 
 /**
  * PUBLIC_INTERFACE
- * MessageBubble renders assistant and user bubble variants following ChatGPT-like spacing and typographic cues,
- * tuned for the Ocean Professional light theme.
+ * MessageBubble renders assistant, user, and system variants with refined bubble shape, spacing,
+ * and typography similar to ChatGPT while honoring the Ocean Professional theme.
  */
 export default function MessageBubble({
   role,
   children,
+  timestamp,
+  name,
+  avatar,
 }: {
   role: "assistant" | "user" | "system";
   children: React.ReactNode;
+  timestamp?: string;
+  name?: string;
+  avatar?: React.ReactNode;
 }) {
   const isAssistant = role === "assistant";
   const isSystem = role === "system";
 
-  const classes =
-    isSystem
-      ? "bg-gray-50 border-l-4 border-blue-500 text-gray-700"
-      : isAssistant
-      ? "bg-blue-50 text-blue-900 border border-blue-100"
-      : "bg-gray-100 text-gray-900 border border-gray-200 ml-auto";
+  // Alignment: user to right, assistant/system to left
+  const align = isAssistant || isSystem ? "justify-start" : "justify-end";
 
+  // Bubble visual classes
+  const bubbleClass = isSystem
+    ? "bubble bubble-system text-gray-700"
+    : isAssistant
+    ? "bubble bubble-assistant text-gray-900"
+    : "bubble bubble-user text-gray-900";
+
+  // Row wrapper: allow avatar/timestamp
   return (
-    <div
-      role="listitem"
-      className={`max-w-[850px] w-fit rounded-lg px-4 py-3 leading-relaxed ${classes}`}
-    >
-      <div className="prose-sm prose-headings:mt-3 prose-p:my-3 prose-ul:my-3 prose-ol:my-3">
-        {children}
+    <div className={`flex ${align}`} role="listitem" aria-live={isAssistant ? "polite" : undefined}>
+      {/* Avatar (optional, only show for assistant/system on left) */}
+      {(isAssistant || isSystem) && (
+        <div className="mr-2 mt-0.5 h-7 w-7 shrink-0 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold select-none" aria-hidden>
+          {avatar ?? "SA"}
+        </div>
+      )}
+
+      {/* Bubble */}
+      <div className={`max-w-[850px] bubble-in ${bubbleClass}`}>
+        {/* Optional header: name + timestamp */}
+        {(name || timestamp) && (
+          <div className="mb-1 flex items-center gap-2">
+            {name ? <span className="text-xs font-medium text-gray-700">{name}</span> : null}
+            {timestamp ? <span className="msg-meta">{timestamp}</span> : null}
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="prose-chat">
+          {children}
+        </div>
       </div>
     </div>
   );
