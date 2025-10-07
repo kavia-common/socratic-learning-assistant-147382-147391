@@ -4,6 +4,7 @@ import ConsentModal from "@/components/ConsentModal";
 import CookieBanner from "@/components/CookieBanner";
 import { AuthProvider } from "@/lib/auth";
 import { QueryProvider } from "@/lib/query";
+import RouteTransition from "@/components/RouteTransition";
 
 export const metadata: Metadata = {
   title: "Socratic Learning Assistant",
@@ -23,7 +24,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
         <AuthProvider>
           <QueryProvider>
-            {children}
+            <RouteTransition>{children}</RouteTransition>
             <ConsentModal />
             <CookieBanner />
           </QueryProvider>

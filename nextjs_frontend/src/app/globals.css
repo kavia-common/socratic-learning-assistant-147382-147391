@@ -200,6 +200,27 @@ a:hover { color: #1e40af; }
   animation: bubbleIn 180ms ease-out;
 }
 
+/* Route transitions: container and enter keyframe classes */
+/* Container ensures no layout shift by reserving space; outgoing content can be absolutely positioned if needed. */
+.route-transition-container {
+  position: relative;
+  min-height: 1px; /* avoid collapse */
+}
+
+/* Enter animation: subtle crossfade + upward 6–8px slide. Keep under 200–220ms and use ease-out tokens */
+@keyframes routeFadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0px); }
+}
+
+/* Motion-safe: only animate when user hasn't requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .route-transition-enter {
+    animation: routeFadeSlideIn var(--transition-base);
+    will-change: opacity, transform;
+  }
+}
+
 /* Motion-safe enter animation triggered via [data-new="true"] */
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(8px); }
