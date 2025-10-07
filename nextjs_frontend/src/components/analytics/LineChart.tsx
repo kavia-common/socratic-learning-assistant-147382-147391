@@ -12,7 +12,13 @@ import {
 } from "recharts";
 
 // PUBLIC_INTERFACE
-type LineDatum = { date: string } & Record<string, number>;
+// Allow a string 'date' field plus any number of numeric series keys.
+type LineDatum = {
+  date: string;
+} & {
+  // series keys like "value", "score", etc. must be numbers, but 'date' stays string
+  [k: string]: number | string;
+};
 
 export default function LineChart({
   data,

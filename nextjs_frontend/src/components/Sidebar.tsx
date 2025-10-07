@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Badge } from "./ui/Badge";
 
+// De-duplicated student nav to avoid two items with identical href
 const studentItems = [
-  { href: "/student", label: "New Chat" },
-  { href: "/student", label: "Chat History" },
+  { href: "/student", label: "Student Home" },
 ];
 
 const mentorItems = [
@@ -48,10 +48,12 @@ export default function Sidebar() {
         )}
       </div>
       <ul className="mt-4 space-y-1">
-        {items.map((item) => {
+        {items.map((item, index) => {
           const active = pathname === item.href;
+          // Use a stable, unique key even if future items share href
+          const key = `${item.href}-${index}`;
           return (
-            <li key={item.href}>
+            <li key={key}>
               <Link
                 className={`block rounded-md px-3 py-2 text-sm focus-ring ${
                   active ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"

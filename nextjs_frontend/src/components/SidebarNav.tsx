@@ -21,10 +21,11 @@ export default function SidebarNav() {
         <span className="text-sm font-semibold">Socratic Assistant</span>
       </div>
       <ul className="mt-4 space-y-1">
-        {navItems.map((item) => {
+        {navItems.map((item, index) => {
           const active = pathname === item.href;
+          const key = `${item.href}-${index}`;
           return (
-            <li key={item.href}>
+            <li key={key}>
               <Link
                 className={`block rounded-md px-3 py-2 text-sm focus-ring ${
                   active ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"
