@@ -65,3 +65,10 @@ a {
 .gradient-bg {
   background-image: linear-gradient(to bottom right, rgb(59 130 246 / 0.1), #f9fafb);
 }
+
+/* Light prose for bubbles */
+.prose-sm p { margin: 0.25rem 0; }
+.prose-sm ul { margin: 0.25rem 0 0.25rem 1.25rem; list-style: disc; }
+.prose-sm ol { margin: 0.25rem 0 0.25rem 1.25rem; list-style: decimal; }
+.prose-sm code { background: #f3f4f6; padding: 0 4px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+.prose-sm pre { background: #f3f4f6; padding: 12px; border-radius: 8px; overflow: auto; }
