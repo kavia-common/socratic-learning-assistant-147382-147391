@@ -57,6 +57,11 @@ export default function MaterialsPage() {
         </div>
 
         <div className="card p-6 space-y-4">
+          {/* aria-live region for messages/errors related to uploads */}
+          <div aria-live="polite" aria-atomic="true" className="sr-only">
+            {msg ? msg : ""}
+          </div>
+
           <Dropzone onFiles={setFiles} />
           {files.length > 0 && (
             <div className="flex items-center justify-between text-sm text-gray-700">
