@@ -200,6 +200,57 @@ a:hover { color: #1e40af; }
   animation: bubbleIn 180ms ease-out;
 }
 
+/* Motion-safe enter animation triggered via [data-new="true"] */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slight scale-in only for user messages */
+@keyframes scaleInUser {
+  from { transform: translateY(8px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Apply only when user hasn't requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .msg-enter {
+    animation: fadeSlideIn var(--transition-base);
+  }
+  .msg-enter-user {
+    animation: scaleInUser var(--transition-base);
+  }
+}
+
+/* Typing indicator shimmer (3 dots) */
+@keyframes typingDot {
+  0% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+  100% { opacity: 0.35; transform: translateY(0); }
+}
+.typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.typing-dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #9ca3af; /* gray-400 */
+}
+@media (prefers-reduced-motion: no-preference) {
+  .typing-dots span:nth-child(1) { animation: typingDot 900ms ease-in-out infinite; }
+  .typing-dots span:nth-child(2) { animation: typingDot 900ms ease-in-out 150ms infinite; }
+  .typing-dots span:nth-child(3) { animation: typingDot 900ms ease-in-out 300ms infinite; }
+}
+
+/* Prevent layout shift: reserve minimal height for typing bubble content when present */
+.typing-bubble {
+  min-height: 1.75rem; /* ~28px fits bubble padding + dots */
+}
+
 /* Light prose for smaller components retained */
 .prose-sm p { margin: 0.25rem 0; }
 .prose-sm ul { margin: 0.25rem 0 0.25rem 1.25rem; list-style: disc; }

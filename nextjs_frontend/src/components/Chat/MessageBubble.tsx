@@ -13,12 +13,15 @@ export default function MessageBubble({
   timestamp,
   name,
   avatar,
+  isNew = false,
 }: {
   role: "assistant" | "user" | "system";
   children: React.ReactNode;
   timestamp?: string;
   name?: string;
   avatar?: React.ReactNode;
+  /** When true, applies an enter animation (motion-safe) */
+  isNew?: boolean;
 }) {
   const isAssistant = role === "assistant";
   const isSystem = role === "system";
@@ -33,19 +36,29 @@ export default function MessageBubble({
     ? "bubble bubble-assistant text-gray-900"
     : "bubble bubble-user text-gray-900";
 
+  // Motion-safe enter animation classes
+  const enterClass = isNew ? (role === "user" ? "msg-enter-user" : "msg-enter") : "";
+
   // Row wrapper: allow avatar/timestamp
   return (
-    <div className={`flex ${align}`} role="listitem" aria-live={isAssistant ? "polite" : undefined}>
-      {/* Avatar (optional, only show for assistant/system on left) */}
+    <div
+      className={`flex ${align}`}
+      role="listitem"
+      aria-live={isAssistant ? "polite" : undefined}
+      data-role={role}
+      data-new={isNew ? "true" : "false"}
+    >
       {(isAssistant || isSystem) && (
-        <div className="mr-2 mt-0.5 h-7 w-7 shrink-0 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold select-none" aria-hidden>
+        <div
+          className="mr-2 mt-0.5 h-7 w-7 shrink-0 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold select-none"
+          aria-hidden
+        >
           {avatar ?? "SA"}
         </div>
       )}
 
       {/* Bubble */}
-      <div className={`max-w-[850px] bubble-in ${bubbleClass}`}>
-        {/* Optional header: name + timestamp */}
+      <div className={`max-w-[850px] ${bubbleClass} ${enterClass}`}>
         {(name || timestamp) && (
           <div className="mb-1 flex items-center gap-2">
             {name ? <span className="text-xs font-medium text-gray-700">{name}</span> : null}
@@ -54,7 +67,7 @@ export default function MessageBubble({
         )}
 
         {/* Content */}
-        <div className="prose-chat">
+        <div className="prose-chat whitespace-pre-wrap">
           {children}
         </div>
       </div>

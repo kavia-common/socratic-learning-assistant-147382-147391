@@ -70,11 +70,18 @@ export default function ChatPage() {
             className="max-h-[60vh] overflow-y-auto p-4 md:p-6"
           >
             <div className="chat-container mx-auto w-full flex flex-col gap-3">
-              {messages.map((m, i) => (
-                <MessageBubble key={i} role={m.role}>
-                  {m.content}
-                </MessageBubble>
-              ))}
+              {messages.map((m, i) => {
+                const isLast = i === messages.length - 1;
+                const isSecondLast = i === messages.length - 2;
+                const isNew = isLast || isSecondLast;
+                return (
+                  <MessageBubble key={i} role={m.role} isNew={isNew}>
+                    {m.content}
+                  </MessageBubble>
+                );
+              })}
+
+              {/* Optional: typing indicator could be shown here if wiring loading state; omitted by default */}
 
               {/* Example separator (could be date/time) */}
               {/* <div className="flex items-center"><span className="chat-separator">Today</span></div> */}

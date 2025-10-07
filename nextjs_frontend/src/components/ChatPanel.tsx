@@ -19,16 +19,19 @@ export default function ChatPanel() {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages.length]);
+  }, [messages.length, loading]);
 
   async function onSend() {
     const cleaned = sanitizeInput(input).trim();
     if (!cleaned) return;
     setLoading(true);
+
+    // Add user message with isNew styling
     setMessages((m) => [...m, { role: "user", content: cleaned }]);
 
     try {
       const res = await api.post<{ reply: string }>("/api/chat", { message: cleaned });
+      // Append assistant reply
       setMessages((m) => [...m, { role: "assistant", content: res.reply }]);
     } catch {
       setMessages((m) => [
@@ -57,11 +60,30 @@ export default function ChatPanel() {
         className="max-h-[60vh] overflow-y-auto p-4 md:p-6 flex flex-col gap-3"
       >
         <div className="chat-container mx-auto w-full flex flex-col gap-3">
-          {messages.map((m, idx) => (
-            <MessageBubble key={idx} role={m.role}>
-              {m.content}
-            </MessageBubble>
-          ))}
+          {messages.map((m, idx) => {
+            const isLast = idx === messages.length - 1;
+            const isSecondLast = idx === messages.length - 2;
+            const isNew = isLast || isSecondLast; // animate most recent additions
+            return (
+              <MessageBubble key={idx} role={m.role} isNew={isNew}>
+                {m.content}
+              </MessageBubble>
+            );
+          })}
+
+          {/* Typing indicator bubble (shown during loading) – hidden from SR to avoid noise. */}
+          {loading && (
+            <div className="flex justify-start" aria-hidden>
+              <div className="bubble bubble-assistant typing-bubble">
+                <div className="typing-dots" aria-hidden>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div ref={endRef} />
         </div>
       </div>
