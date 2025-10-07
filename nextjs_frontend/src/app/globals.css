@@ -98,6 +98,14 @@ a:hover { color: #1e40af; }
   box-shadow: var(--shadow-soft);
 }
 
+/* Optional interactive elevation utility for analytics cards and charts */
+@media (prefers-reduced-motion: no-preference) {
+  .elev-interactive:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+  }
+}
+
 .gradient-bg {
   background-image: linear-gradient(to bottom right, rgb(59 130 246 / 0.1), #f9fafb);
 }
