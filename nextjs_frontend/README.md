@@ -8,11 +8,12 @@ Ocean Professional themed Next.js App Router UI with privacy/security scaffoldin
 - Accessible, responsive components (no external UI lib required)
 
 ## Run locally
-1. Copy `.env.example` to `.env.local` and set values.
+1. Copy `.env.example` to `.env.local` and adjust as needed. The default PORT is 3000.
 2. Install dependencies and start dev server:
    - npm install
    - npm run dev
-3. Open http://localhost:3000
+3. Open http://localhost:3000 (if port 3000 is busy, Next will pick the next available port; set `PORT=3000` to force).
+4. Health check: GET http://localhost:3000/api/health should return `{ ok: true }`.
 
 ## Environment variables
 - NEXT_PUBLIC_API_BASE: Base path for API calls (default empty, UI uses internal `/api` routes)

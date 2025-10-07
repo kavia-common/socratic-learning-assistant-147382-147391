@@ -1,4 +1,12 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Socratic logo">
-  <rect width="64" height="64" rx="12" fill="#2563EB"/>
-  <path d="M20 24c0-2.21 1.79-4 4-4h16c2.21 0 4 1.79 4 4v8c0 2.21-1.79 4-4 4H28l-6 6v-6h-2c-2.21 0-4-1.79-4-4v-8z" fill="white"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simple Ocean Professional logo -->
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Socratic logo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="20" fill="url(#g)"/>
+  <path d="M40 64c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm14 0c0 5.523 4.477 10 10 10s10-4.477 10-10-4.477-10-10-10-10 4.477-10 10z" fill="#fff"/>
 </svg>
